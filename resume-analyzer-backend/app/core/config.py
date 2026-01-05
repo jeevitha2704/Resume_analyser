@@ -23,6 +23,7 @@ class Settings(BaseSettings):
         "http://localhost:3000", 
         "http://localhost:5173",
         "https://*.vercel.app",
+        "https://resume-analyser-3kfq.vercel.app",
         "https://*.railway.app"
     ]
     
