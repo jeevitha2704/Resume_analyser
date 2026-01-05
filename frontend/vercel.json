@@ -1,1 +1,1 @@
-{"version": 2, "builds": [{"src": "package.json", "use": "@vercel/static-build", "config": {"distDir": "dist"}}], "rewrites": [{"source": "/(.*)", "destination": "/index.html"}]}
+{"version": 2, "builds": [{"src": "package.json", "use": "@vercel/static-build", "config": {"distDir": "dist"}}], "rewrites": [{"source": "/(.*)", "destination": "/index.html"}], "env": {"VITE_API_URL": "https://resumeanalyserbackend-production-2e0c.up.railway.app"}}
