@@ -19,13 +19,7 @@ class Settings(BaseSettings):
     DEBUG: bool = False  # Production: False
     
     # CORS
-    ALLOWED_ORIGINS: list = [
-        "http://localhost:3000", 
-        "http://localhost:5173",
-        "https://*.vercel.app",
-        "https://resume-analyser-3kfq.vercel.app",
-        "https://*.railway.app"
-    ]
+    ALLOWED_ORIGINS: list = ["*"]  # Temporary: Allow all origins for debugging
     
     class Config:
         env_file = ".env"
