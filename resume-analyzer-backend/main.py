@@ -16,12 +16,12 @@ app = FastAPI(
     debug=settings.DEBUG
 )
 
-# CORS middleware
+# CORS middleware - More permissive setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_origins=["*"],
+    allow_credentials=False,  # Changed to False
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -32,7 +32,11 @@ app.include_router(job_match.router, prefix="/api/job", tags=["job matching"])
 
 @app.get("/")
 async def root():
-    return {"message": "AI Resume Analyzer API", "version": settings.VERSION}
+    return {"message": "AI Resume Analyzer API", "version": "1.0.0"}
+
+@app.options("/{path:path}")
+async def options_handler(path: str):
+    return {"status": "ok"}
 
 @app.get("/health")
 async def health_check():
