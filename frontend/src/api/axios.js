@@ -3,13 +3,15 @@ import axios from 'axios'
 // Get API URL from environment or use fallback
 const API_URL = import.meta.env.VITE_API_URL || 'https://resumeanalyserbackend-production-2e0c.up.railway.app'
 
-// Create axios instance
+// Create axios instance with CORS workaround
 const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   },
   withCredentials: false,
+  mode: 'cors',
 })
 
 // Add token to requests if it exists
