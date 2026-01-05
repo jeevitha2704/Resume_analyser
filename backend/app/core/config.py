@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     # App
     APP_NAME: str = "AI Resume Analyzer"
     VERSION: str = "1.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = False  # Production: False
     
     # CORS
     ALLOWED_ORIGINS: list = [
