@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// Use proxy for all API calls to bypass CORS
-const API_URL = ''  // Empty for proxy (uses same domain)
+// Force use of proxy - ignore environment variable
+const API_URL = ''  // Always use proxy (same origin)
 
 // Create axios instance with CORS workaround
 const api = axios.create({

@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       console.log('Logging in with:', { email, password })
-      console.log('API URL:', import.meta.env.VITE_API_URL)
+      console.log('Using proxy for API calls')
       const response = await api.post('/api/auth/login', { email, password })
       console.log('Login response:', response)
       const { access_token } = response.data
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (name, email, password) => {
     try {
       console.log('Registering with:', { name, email, password })
-      console.log('API URL:', import.meta.env.VITE_API_URL)
+      console.log('Using proxy for API calls')
       const response = await api.post('/api/auth/register', { name, email, password })
       console.log('Register response:', response)
       return { success: true }
