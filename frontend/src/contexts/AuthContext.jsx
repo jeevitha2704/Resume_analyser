@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api/axios'
 
 const AuthContext = createContext()
 
@@ -21,16 +21,14 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       // Verify token and get user info
-      axios.get('/api/auth/me')
+      api.get('/api/auth/me')
         .then(response => {
           setUser(response.data)
         })
         .catch(() => {
           localStorage.removeItem('token')
           setToken(null)
-          delete axios.defaults.headers.common['Authorization']
         })
         .finally(() => {
           setLoading(false)
@@ -42,14 +40,13 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/api/auth/login', { email, password })
+      const response = await api.post('/api/auth/login', { email, password })
       const { access_token } = response.data
       setToken(access_token)
       localStorage.setItem('token', access_token)
-      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
       
       // Get user info
-      const userResponse = await axios.get('/api/auth/me')
+      const userResponse = await api.get('/api/auth/me')
       setUser(userResponse.data)
       
       return { success: true }
@@ -63,7 +60,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      await axios.post('/api/auth/register', { name, email, password })
+      await api.post('/api/auth/register', { name, email, password })
       return { success: true }
     } catch (error) {
       return { 
@@ -79,7 +76,6 @@ export const AuthProvider = ({ children }) => {
     setToken(null)
     setUser(null)
     setHasCompletedOnboarding(false)
-    delete axios.defaults.headers.common['Authorization']
   }
 
   const completeOnboarding = () => {
