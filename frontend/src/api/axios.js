@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// Get API URL from environment or use fallback
-const API_URL = import.meta.env.VITE_API_URL || 'https://resumeanalyserbackend-production-2e0c.up.railway.app'
+// Use proxy for all API calls to bypass CORS
+const API_URL = ''  // Empty for proxy (uses same domain)
 
 // Create axios instance with CORS workaround
 const api = axios.create({
