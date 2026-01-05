@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// Get API URL from environment or use proxy for development
-const API_URL = import.meta.env.VITE_API_URL || ''
+// Get API URL from environment or use fallback
+const API_URL = import.meta.env.VITE_API_URL || 'https://resumeanalyserbackend-production-2e0c.up.railway.app'
 
 // Create axios instance
 const api = axios.create({
@@ -9,6 +9,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: false,
 })
 
 // Add token to requests if it exists

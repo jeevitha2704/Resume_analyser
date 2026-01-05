@@ -40,7 +40,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
+      console.log('Logging in with:', { email, password })
+      console.log('API URL:', import.meta.env.VITE_API_URL)
       const response = await api.post('/api/auth/login', { email, password })
+      console.log('Login response:', response)
       const { access_token } = response.data
       setToken(access_token)
       localStorage.setItem('token', access_token)
@@ -51,6 +54,8 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true }
     } catch (error) {
+      console.error('Login error:', error)
+      console.error('Error response:', error.response?.data)
       return { 
         success: false, 
         error: error.response?.data?.detail || 'Login failed' 
@@ -60,9 +65,14 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      await api.post('/api/auth/register', { name, email, password })
+      console.log('Registering with:', { name, email, password })
+      console.log('API URL:', import.meta.env.VITE_API_URL)
+      const response = await api.post('/api/auth/register', { name, email, password })
+      console.log('Register response:', response)
       return { success: true }
     } catch (error) {
+      console.error('Register error:', error)
+      console.error('Error response:', error.response?.data)
       return { 
         success: false, 
         error: error.response?.data?.detail || 'Registration failed' 
